@@ -12,7 +12,7 @@ double factorial(int x)
 }
 
 double polyCoeff(int n, int r){
-    if(n<r){
+    if(r<1){
         return 0;
     }
     return factorial(n) / (factorial(r) * factorial(n-r));
@@ -20,14 +20,18 @@ double polyCoeff(int n, int r){
 
 int main(){
     //bernoulli numbers to be found
-    int n=4;
+    int n=6;
     double poly[n][n];
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
-            poly[i][j] = polyCoeff(i+1,j+1);
+            poly[i][n-j-1] = polyCoeff(i+1,i-j+1);
+        }
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
             printf("%f ",poly[i][j]);
         }
-        printf("\n");
+    printf("\n");
     }
     return 0;
 }
