@@ -1,27 +1,33 @@
 #include <stdio.h>
 #include <math.h>
 
-unsigned long factorial(unsigned long);
-unsigned long ncr(unsigned long, unsigned long);
-
-int main(int argc, char **argv)
+double factorial(int x)
 {
-    printf("Kaixo Mundo\n");
-    return 0;
-}
-
-unsigned long factorial(unsigned long x)
-{
-    int k = 1;
-    while (x < 1)
-    {
+    double k = 1;
+    while (x > 1){
         k *= x;
         x--;
     }
     return k;
 }
 
-unsigned long ncr(unsigned long n, unsigned long r)
-{
+double polyCoeff(int n, int r){
+    if(n<r){
+        return 0;
+    }
     return factorial(n) / (factorial(r) * factorial(n-r));
+}
+
+int main(){
+    //bernoulli numbers to be found
+    int n=4;
+    double poly[n][n];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            poly[i][j] = polyCoeff(i+1,j+1);
+            printf("%f ",poly[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
 }
