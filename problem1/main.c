@@ -20,18 +20,45 @@ double polyCoeff(int n, int r){
 
 int main(){
     //bernoulli numbers to be found
-    int n=6;
+    int n=5;
     double poly[n][n];
+    double calcArr[n][n];
+    double scaleFactor;
+    //generates matrix of pascal's triangle
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
-            poly[i][n-j-1] = polyCoeff(i+1,i-j+1);
+            poly[i][j] = polyCoeff(i+1,i-j+1)*1/(i+1);
         }
     }
+    //generates bernoulli polynomials and numbers
     for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            printf("%f ",poly[i][j]);
+        for(int j=i;j>=0;j--){
+            for (int k=i;k>=0;k--){
+                calcArr[j][k] = poly[j][k];
+            }
         }
-    printf("\n");
+        //generates coefficients on terms of polynomial
+        for(int j=i-1;j>=0;j--){
+            scaleFactor = calcArr[i][j]*-1;
+            for(int k=0;k<n;k++){
+                calcArr[j][k] = calcArr[j][k]*scaleFactor;
+                calcArr[i][k] = calcArr[j][k]+calcArr[i][k];
+            }
+        }        
+        //reports bernoulli polynomials
+        printf("The n=%d bernoulli polynomial is: \n",i);
+        for(int j=i;j>=0;j--){
+            if(j>1){
+                printf("%fx^%d + ",calcArr[j][j],j);
+            } else if(j==1){
+                printf("%fx + ",calcArr[1][1]);
+            } else {
+                printf("%f\n",calcArr[0][0]);
+            }
+        }
+        //reports bernoulli numbers
+        printf("The n=%i bernoulli number is: %f\n",i,calcArr[0][0]);
+        printf("\n");
     }
     return 0;
 }
