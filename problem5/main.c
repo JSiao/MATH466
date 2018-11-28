@@ -2,18 +2,20 @@
 #include <math.h>
 
 static double alpha[11];
+static double temp[11];
 static int n;
 
-double generate_alphas(int n);
-double b_(int, double);
+double generate_alpha(int n);
+void generate_b(int);
 
 int main(int argc, char **argv)
 {
     alpha[0] = 1;
     alpha[1] = -0.5;
-    for (int h = 0; h < 11; h++)
+    for (int h = 2; h < 11; h++)
     {
-        generate_alphas(h);
+        generate_alpha(h);
+        generate_b(h);
         printf("%d\t\t", h);
         for (int y = 0; y <= h; y++)
         {
@@ -24,20 +26,26 @@ int main(int argc, char **argv)
     return 0;
 }
 
-double generate_alphas(int n)
+double generate_alpha(int n)
 {
-    for (int u = 0; u <= n; u++)
+    double return_val = 0;
+    for (int u = 0; u < n; u++)
     {
-        alpha[u] = (1.0/(u+2)) + (1.0/(u+1));
+        return_val += alpha[u] / (n-u+1);
     }
+    return return_val * n;
 }
 
-double b_(int n, double x)
+void generate_b(int n)
 {
-    double total = 0;
-    for (int i = 0; i < n; i++)
+    double r[n];
+    for (int i = 0; i < n; i ++)
     {
-        total += (alpha[i]/(i+2) + (alpha[i] * pow(x, i))/(i+1));
+        r[i] = alpha[i] * n / (n - i);
     }
-    return total;
+    alpha[n] = generate_alpha(n);
+    for (int i = 0; i < n; i ++)
+    {
+        alpha[i] = r[i];
+    }
 }
