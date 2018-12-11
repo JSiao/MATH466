@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\noindent
+1) Given the definition of a Bernoulli polynomials being the polynomials that satisfy:
+	$$\int_{x}^{x+1} \mathcal{B}_n(t)dt = x^n$$
+We can insert some polynomial of degree n to get:
+        $$\int_{x}^{x+1} \sum_{i=0}^{n}\alpha_i t^idt = x^n$$
+From this, we can seperate the integral into a sum of integrals:
+	$$\sum_{i=0}^{n}\int_{x}^{x+1} \alpha_i t^idt = x^n$$
+where each integral will evaluate to the form:
+	$$\sum_{i=0}^{n}\alpha_i\left(\frac{(x+1)^{i+1}}{i+1} - \frac{x^{i+1}}{i+1}\right)$$
+This can be easily evaluated as polynomials with the coefficients of a modified pascal's triangle where the right most term of each row is truncated (due to the subtratction term) and each coefficient is divided by the index of the row. With this idea, we obtain this product of matricies:
+\[
+\begin{bmatrix}
+	1 & x & x^2 & x^3 & x^4 & \dots & x^n \\
+\end{bmatrix}
+\begin{bmatrix}
+	1 & 0 & 0 & 0 & \dots & 0 \\
+	1/2 & 1 & 0 & 0 & \dots & 0 \\
+	1/3 & 1 & 1 & 0 & \dots & 0 \\
+	1/4 & 1 & 3/2 & 1 & \dots & 0 \\
+	\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+	\frac{1}{n} & 1 & \frac{(n-1)!}{2!(n-2)!} & \frac{(n-1)!}{3!(n-3)!} & \dots & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+	\alpha_0 \\ \alpha_1 \\ \alpha_2 \\ \alpha_3 \\ \alpha_4 \\ \vdots \\ \alpha_n \\
+\end{bmatrix}
+\]
+because we know this product of matricies must evaluate out to $x^n$, it is trivial to solve for the values of $\alpha$ and, with the values of $\alpha$, we know the bernoulli polynmoial (for code, see supplimental information). Evaluating this polynomial at 0 gives us the following Bernoulli numbers:
+	$$B_0 = 1$$
+	$$B_1 = -\frac{1}{2}$$
+	$$B_2 = \frac{1}{6}$$
+	$$B_3 = 0$$
+	$$B_4 = -\frac{1}{30}$$
+\end{document}
