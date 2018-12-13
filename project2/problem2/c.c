@@ -4,9 +4,9 @@
 /*--------------------------------------------------------
 Approximates:
  y' = 2/t * y t^2 * e^2 ;  1 <= t <= 2 ;  y(1) = 0;
-Using second order Taylor's method:
+Using fourth order Taylor's method:
  Given some stepsize h
- y_n+1=y_n+h*f(y_n,t_n)+(h^2/2)*f'(y_n,t_n)
+ y_n+1=y_n+h*f(y_n,t_n)+(h^2/2)*f'(y_n,t_n)+(h^3/6)*f''(y_n,t_n)+(h^4/24)*f'''(y_n,t_n)
 --------------------------------------------------------*/
 
 //exact solution
