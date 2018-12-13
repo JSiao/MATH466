@@ -1,0 +1,32 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\begin{document}
+\noindent
+c) Equation 5 is listed as
+$$
+|y(t_i)-w_i| \leq \frac{hM}{2L}[e^{L(t_i-a)-1]}
+$$
+Finding M:
+$$
+M \geq |y''(t)|=|(t^2+4t+2)e^t-2e|
+$$
+$$
+\begin{aligned}
+	max(M) &= (4+8+2)e^2-2e
+	\\&=14e^2-2e
+\end{aligned}
+$$
+Finding L:
+$$
+L=max(|f'(y,t|)=2
+$$
+Finding required step for error to be less than 0.1:
+$$
+\begin{aligned}
+	h&=\frac{(.1)(2)(L)}{M(e^{L(t_i-a)}-1)}
+	\\&=\frac{.4}{(14e^2-2e)(e^2-1)}
+	\\&=6.387808944*10^{-4}
+\end{aligned}
+$$
+\end{document}
